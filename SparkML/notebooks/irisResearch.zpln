@@ -1,10 +1,10 @@
 ﻿{
  "paragraphs": [
   {
-   "text": "import org.apache.spark.sql.functions.col\nval basePath = \"../../zeppelin/notebook/SparkML\"\n//val basePath = \"C:/Zeppelin/notebook/SparkML\"\n\nval raw = spark\n        .read\n        .option(\"header\", \"true\")\n        .option(\"inferSchema\", \"true\")\n        .csv(s\"$basePath/data/Iris.csv\")\n\nval columns: Array[String] = raw.columns\nval columnsLen: Int = columns.length\n//val colsToDrop: Array[String] = columns.slice(columnsLen - 2, columnsLen) :+ columns.head\n\nval df = raw.drop(col(\"Id\"))\n\ndf.show(5, truncate = false)",
+   "text": "import org.apache.spark.sql.Dataset\n\nval basePath = \"../../zeppelin/notebook/SparkML\"",
    "user": "anonymous",
-   "dateUpdated": "2021-11-30T20:35:48+0000",
-   "progress": 0.0,
+   "dateUpdated": "2021-12-01T17:47:02+0000",
+   "progress": 0,
    "config": {
     "editorSetting": {
      "language": "scala",
@@ -12,9 +12,9 @@
      "completionKey": "TAB",
      "completionSupport": true
     },
-    "colWidth": 12.0,
+    "colWidth": 12,
     "editorMode": "ace/mode/scala",
-    "fontSize": 9.0,
+    "fontSize": 9,
     "results": {},
     "enabled": true
    },
@@ -27,7 +27,94 @@
     "msg": [
      {
       "type": "TEXT",
-      "data": "+-------------+------------+-------------+------------+-----------+\n|SepalLengthCm|SepalWidthCm|PetalLengthCm|PetalWidthCm|Species    |\n+-------------+------------+-------------+------------+-----------+\n|5.1          |3.5         |1.4          |0.2         |Iris-setosa|\n|4.9          |3.0         |1.4          |0.2         |Iris-setosa|\n|4.7          |3.2         |1.3          |0.2         |Iris-setosa|\n|4.6          |3.1         |1.5          |0.2         |Iris-setosa|\n|5.0          |3.6         |1.4          |0.2         |Iris-setosa|\n+-------------+------------+-------------+------------+-----------+\nonly showing top 5 rows\n\nimport org.apache.spark.sql.functions.col\n\u001b[1m\u001b[34mbasePath\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = ../../zeppelin/notebook/SparkML\n\u001b[1m\u001b[34mraw\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Id: int, SepalLengthCm: double ... 4 more fields]\n\u001b[1m\u001b[34mcolumns\u001b[0m: \u001b[1m\u001b[32mArray[String]\u001b[0m = Array(Id, SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm, Species)\n\u001b[1m\u001b[34mcolumnsLen\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 6\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [SepalLengthCm: double, SepalWidthCm: double ... 3 more fields]\n"
+      "data": "import org.apache.spark.sql.Dataset\n\u001b[1m\u001b[34mbasePath\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = ../../zeppelin/notebook/SparkML\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638208704921_2017297633",
+   "id": "paragraph_1638208704921_2017297633",
+   "dateCreated": "2021-11-29T17:58:24+0000",
+   "dateStarted": "2021-12-01T17:47:02+0000",
+   "dateFinished": "2021-12-01T17:47:02+0000",
+   "status": "FINISHED",
+   "focus": true,
+   "$$hashKey": "object:999"
+  },
+  {
+   "title": "Импорт данных об ирисах",
+   "text": "import org.apache.spark.ml.classification.LogisticRegression\n\n// Load training data\nval training = spark\n        .read\n        .option(\"header\", \"true\")\n        .option(\"inferSchema\", \"true\")\n        .csv(s\"$basePath/data/Iris.csv\")\n\nval lr = new LogisticRegression()\n  .setMaxIter(10)\n  .setRegParam(0.3)\n  .setElasticNetParam(0.8)util.Properties.versionString",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:26:13+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true,
+    "title": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "\u001b[1m\u001b[34mres2\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = version 2.11.12\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638306349381_118206771",
+   "id": "paragraph_1638306349381_118206771",
+   "dateCreated": "2021-11-30T21:05:49+0000",
+   "dateStarted": "2021-12-01T17:47:05+0000",
+   "dateFinished": "2021-12-01T17:47:05+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1000"
+  },
+  {
+   "text": "val raw = spark\n        .read\n        .option(\"header\", \"true\")\n        .option(\"inferSchema\", \"true\")\n        .csv(s\"$basePath/data/Iris.csv\")\n\nval columns: Array[String] = raw.columns\nval columnsLen: Int = columns.length\n\nval df = raw.drop(col(\"Id\"))\n\ndf.show(5, truncate = false)",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T18:29:11+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+-------------+------------+-------------+------------+-----------+\n|SepalLengthCm|SepalWidthCm|PetalLengthCm|PetalWidthCm|Species    |\n+-------------+------------+-------------+------------+-----------+\n|5.1          |3.5         |1.4          |0.2         |Iris-setosa|\n|4.9          |3.0         |1.4          |0.2         |Iris-setosa|\n|4.7          |3.2         |1.3          |0.2         |Iris-setosa|\n|4.6          |3.1         |1.5          |0.2         |Iris-setosa|\n|5.0          |3.6         |1.4          |0.2         |Iris-setosa|\n+-------------+------------+-------------+------------+-----------+\nonly showing top 5 rows\n\n\u001b[1m\u001b[34mraw\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Id: int, SepalLengthCm: double ... 4 more fields]\n\u001b[1m\u001b[34mcolumns\u001b[0m: \u001b[1m\u001b[32mArray[String]\u001b[0m = Array(Id, SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm, Species)\n\u001b[1m\u001b[34mcolumnsLen\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 6\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [SepalLengthCm: double, SepalWidthCm: double ... 3 more fields]\n"
      }
     ]
    },
@@ -40,25 +127,745 @@
      "group": "spark",
      "values": [
       {
-       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=22"
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=0",
+       "$$hashKey": "object:1566"
       },
       {
-       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=23"
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=1",
+       "$$hashKey": "object:1567"
       },
       {
-       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=24"
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=2",
+       "$$hashKey": "object:1568"
       }
      ],
      "interpreterSettingId": "spark"
     }
    },
-   "progressUpdateIntervalMs": 500.0,
-   "jobName": "paragraph_1638304548185_839801460",
-   "id": "paragraph_1638304548185_839801460",
-   "dateCreated": "2021-11-30T20:35:48+0000",
-   "dateStarted": "2021-11-30T20:35:48+0000",
-   "dateFinished": "2021-11-30T20:35:48+0000",
-   "status": "FINISHED"
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638209222044_970994448",
+   "id": "paragraph_1638209222044_970994448",
+   "dateCreated": "2021-11-29T18:07:02+0000",
+   "dateStarted": "2021-12-01T17:47:09+0000",
+   "dateFinished": "2021-12-01T17:47:12+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1001"
+  },
+  {
+   "text": "val irisTypes = df.select(df(\"Species\")).distinct\nirisTypes.show()",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T17:47:15+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+---------------+\n|        Species|\n+---------------+\n| Iris-virginica|\n|    Iris-setosa|\n|Iris-versicolor|\n+---------------+\n\n\u001b[1m\u001b[34mirisTypes\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [Species: string]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=3",
+       "$$hashKey": "object:1622"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=4",
+       "$$hashKey": "object:1623"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=5",
+       "$$hashKey": "object:1624"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=6",
+       "$$hashKey": "object:1625"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=7",
+       "$$hashKey": "object:1626"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638211763020_1516789596",
+   "id": "paragraph_1638211763020_1516789596",
+   "dateCreated": "2021-11-29T18:49:23+0000",
+   "dateStarted": "2021-12-01T17:47:15+0000",
+   "dateFinished": "2021-12-01T17:47:17+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1002"
+  },
+  {
+   "text": "df.printSchema",
+   "user": "anonymous",
+   "dateUpdated": "2021-11-29T18:55:04+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "root\n |-- Id: integer (nullable = true)\n |-- SepalLengthCm: double (nullable = true)\n |-- SepalWidthCm: double (nullable = true)\n |-- PetalLengthCm: double (nullable = true)\n |-- PetalWidthCm: double (nullable = true)\n |-- Species: string (nullable = true)\n\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638209288853_187498170",
+   "id": "paragraph_1638209288853_187498170",
+   "dateCreated": "2021-11-29T18:08:08+0000",
+   "dateStarted": "2021-11-29T18:55:04+0000",
+   "dateFinished": "2021-11-29T18:55:04+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1003"
+  },
+  {
+   "title": "Сконвертируем названия видов ирисов в числовые значения",
+   "text": "val dft = df.withColumn(\"target\", when($\"Species\" === \"Iris-virginica\", 0).when($\"Species\" === \"Iris-setosa\", 1).otherwise(2)).drop(col(\"Species\"))\ndft.show()",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:25:21+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true,
+    "title": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+-------------+------------+-------------+------------+------+\n|SepalLengthCm|SepalWidthCm|PetalLengthCm|PetalWidthCm|target|\n+-------------+------------+-------------+------------+------+\n|          5.1|         3.5|          1.4|         0.2|     1|\n|          4.9|         3.0|          1.4|         0.2|     1|\n|          4.7|         3.2|          1.3|         0.2|     1|\n|          4.6|         3.1|          1.5|         0.2|     1|\n|          5.0|         3.6|          1.4|         0.2|     1|\n|          5.4|         3.9|          1.7|         0.4|     1|\n|          4.6|         3.4|          1.4|         0.3|     1|\n|          5.0|         3.4|          1.5|         0.2|     1|\n|          4.4|         2.9|          1.4|         0.2|     1|\n|          4.9|         3.1|          1.5|         0.1|     1|\n|          5.4|         3.7|          1.5|         0.2|     1|\n|          4.8|         3.4|          1.6|         0.2|     1|\n|          4.8|         3.0|          1.4|         0.1|     1|\n|          4.3|         3.0|          1.1|         0.1|     1|\n|          5.8|         4.0|          1.2|         0.2|     1|\n|          5.7|         4.4|          1.5|         0.4|     1|\n|          5.4|         3.9|          1.3|         0.4|     1|\n|          5.1|         3.5|          1.4|         0.3|     1|\n|          5.7|         3.8|          1.7|         0.3|     1|\n|          5.1|         3.8|          1.5|         0.3|     1|\n+-------------+------------+-------------+------------+------+\nonly showing top 20 rows\n\n\u001b[1m\u001b[34mdft\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [SepalLengthCm: double, SepalWidthCm: double ... 3 more fields]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=8",
+       "$$hashKey": "object:1728"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638212110853_637251000",
+   "id": "paragraph_1638212110853_637251000",
+   "dateCreated": "2021-11-29T18:55:10+0000",
+   "dateStarted": "2021-12-01T17:47:18+0000",
+   "dateFinished": "2021-12-01T17:47:19+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1004"
+  },
+  {
+   "text": "dft.groupBy(\"target\").count.show",
+   "user": "anonymous",
+   "dateUpdated": "2021-11-29T19:13:20+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+------+-----+\n|target|count|\n+------+-----+\n|     1|   50|\n|     2|   50|\n|     0|   50|\n+------+-----+\n\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=33",
+       "$$hashKey": "object:1774"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=34",
+       "$$hashKey": "object:1775"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=35",
+       "$$hashKey": "object:1776"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=36",
+       "$$hashKey": "object:1777"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=37",
+       "$$hashKey": "object:1778"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638212291261_205366278",
+   "id": "paragraph_1638212291261_205366278",
+   "dateCreated": "2021-11-29T18:58:11+0000",
+   "dateStarted": "2021-11-29T19:13:20+0000",
+   "dateFinished": "2021-11-29T19:13:21+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1005"
+  },
+  {
+   "text": "/*\nval numericColumns: Array[String] = df.dtypes.filter(p => p._2.equals(\"DoubleType\") || p._2.equals(\"IntegerType\")).map(_._1)\ndf.select(numericColumns.map(col): _*).summary().show\nval numericColumnsPairs = numericColumns.flatMap(f1 => numericColumns.map(f2 => (f1, f2)))\nval pairs = numericColumnsPairs\n        .filter { p => !p._1.equals(p._2) }\n        .map { p => if (p._1 < p._2) (p._1, p._2) else (p._2, p._1) }\n        .distinct\n\nval corr = pairs\n        .map { p => (p._1, p._2, dft.stat.corr(p._1, p._2)) }\n        .filter(_._3 > 0.6)\ncorr.sortBy(_._3).reverse.foreach { c => println(f\"${c._1}%25s${c._2}%25s\\t${c._3}\") }\nval numericColumnsFinal = numericColumns.diff(corr.map(_._2)) */",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:10:19+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "\u001b[1m\u001b[34mpairs\u001b[0m: \u001b[1m\u001b[32mArray[(String, String)]\u001b[0m = Array((SepalLengthCm,SepalWidthCm), (PetalLengthCm,SepalLengthCm), (PetalWidthCm,SepalLengthCm), (PetalLengthCm,SepalWidthCm), (PetalWidthCm,SepalWidthCm), (PetalLengthCm,PetalWidthCm))\n\u001b[1m\u001b[34mcorr\u001b[0m: \u001b[1m\u001b[32mArray[(String, String, Double)]\u001b[0m = Array((PetalLengthCm,SepalLengthCm,0.8717541573048719), (PetalWidthCm,SepalLengthCm,0.8179536333691642), (PetalLengthCm,PetalWidthCm,0.9627570970509666))\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=10",
+       "$$hashKey": "object:1840"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=11",
+       "$$hashKey": "object:1841"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=12",
+       "$$hashKey": "object:1842"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=13",
+       "$$hashKey": "object:1843"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=14",
+       "$$hashKey": "object:1844"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=15",
+       "$$hashKey": "object:1845"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638209915683_1113572521",
+   "id": "paragraph_1638209915683_1113572521",
+   "dateCreated": "2021-11-29T18:18:35+0000",
+   "dateStarted": "2021-12-01T17:47:39+0000",
+   "dateFinished": "2021-12-01T17:47:40+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1006"
+  },
+  {
+   "text": "/*import org.apache.spark.ml.feature.{VectorAssembler, VectorIndexer}\n\nval featureColumns = numericColumnsFinal\n\nval assembler = new VectorAssembler()\n  .setInputCols(featureColumns)\n  .setOutputCol(\"features\")\n\nval assembled = assembler.transform(dft)\nassembled.show(5, truncate = false)*/",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:08:42+0000",
+   "progress": 0,
+   "config": {
+    "colWidth": 12,
+    "fontSize": 9,
+    "enabled": true,
+    "results": {},
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/scala"
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+-------------+------------+-------------+------------+------+---------+\n|SepalLengthCm|SepalWidthCm|PetalLengthCm|PetalWidthCm|target|features |\n+-------------+------------+-------------+------------+------+---------+\n|5.1          |3.5         |1.4          |0.2         |1     |[3.5,1.4]|\n|4.9          |3.0         |1.4          |0.2         |1     |[3.0,1.4]|\n|4.7          |3.2         |1.3          |0.2         |1     |[3.2,1.3]|\n|4.6          |3.1         |1.5          |0.2         |1     |[3.1,1.5]|\n|5.0          |3.6         |1.4          |0.2         |1     |[3.6,1.4]|\n+-------------+------------+-------------+------------+------+---------+\nonly showing top 5 rows\n\nimport org.apache.spark.ml.feature.{VectorAssembler, VectorIndexer}\n\u001b[1m\u001b[34mfeatureColumns\u001b[0m: \u001b[1m\u001b[32mArray[String]\u001b[0m = Array(SepalWidthCm, PetalLengthCm)\n\u001b[1m\u001b[34massembler\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.VectorAssembler\u001b[0m = vecAssembler_fa9329f50cf7\n\u001b[1m\u001b[34massembled\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [SepalLengthCm: double, SepalWidthCm: double ... 4 more fields]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=16",
+       "$$hashKey": "object:1911"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638213817653_1749308474",
+   "id": "paragraph_1638213817653_1749308474",
+   "dateCreated": "2021-11-29T19:23:37+0000",
+   "dateStarted": "2021-12-01T17:47:48+0000",
+   "dateFinished": "2021-12-01T17:47:49+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1007"
+  },
+  {
+   "text": "/*import org.apache.spark.ml.feature.MinMaxScaler\n\nval scaler = new MinMaxScaler()\n  .setInputCol(\"features\")\n  .setOutputCol(\"scaledFeatures\")\n\nval scaled = scaler.fit(assembled).transform(assembled)\n\nscaled.select(\"features\", \"scaledFeatures\").show(5, truncate = false)\n\nimport org.apache.spark.sql.Row\n\nval tt: Array[Dataset[Row]] = scaled.randomSplit(Array(0.7, 0.3))\nval training = tt(0)\nval test = tt(1)\n\nprintln(s\"training\\t${training.count}\\ntest\\t${test.count}\")\nimport org.apache.spark.mllib.regression.LabeledPoint\nval labeled = scaled.rdd.map(row => LabeledPoint(\n   row.getAs[Int](\"target\"),   \n   row.getAs[org.apache.spark.mllib.linalg.Vector](\"scaledFeatures\")\n)) */",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:08:25+0000",
+   "progress": 100,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+---------+-----------------------------------------+\n|features |scaledFeatures                           |\n+---------+-----------------------------------------+\n|[3.5,1.4]|[0.6249999999999999,0.06779661016949151] |\n|[3.0,1.4]|[0.41666666666666663,0.06779661016949151]|\n|[3.2,1.3]|[0.5,0.05084745762711865]                |\n|[3.1,1.5]|[0.4583333333333333,0.0847457627118644]  |\n|[3.6,1.4]|[0.6666666666666666,0.06779661016949151] |\n+---------+-----------------------------------------+\nonly showing top 5 rows\n\nimport org.apache.spark.ml.feature.MinMaxScaler\n\u001b[1m\u001b[34mscaler\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.MinMaxScaler\u001b[0m = minMaxScal_be49d0199020\n\u001b[1m\u001b[34mscaled\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [SepalLengthCm: double, SepalWidthCm: double ... 5 more fields]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=17",
+       "$$hashKey": "object:1957"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=18",
+       "$$hashKey": "object:1958"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638301785436_1149486593",
+   "id": "paragraph_1638301785436_1149486593",
+   "dateCreated": "2021-11-30T19:49:45+0000",
+   "dateStarted": "2021-12-01T17:47:52+0000",
+   "dateFinished": "2021-12-01T17:47:53+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1008"
+  },
+  {
+   "text": "import org.apache.spark.mllib.linalg.Vectors\r\nimport org.apache.spark.mllib.regression.LabeledPoint\r\nimport org.apache.spark.mllib.util.MLUtils\r\n\r\nval labeledPoints = dft.map(row => LabeledPoint(row.getInt(4), \r\n  Vectors.dense(row.getDouble(3), row.getDouble(2), row.getDouble(1), row.getDouble(0))))\r\n  \r\nval splits = labeledPoints.randomSplit(Array(0.7, 0.3))\r\nval (trainingData, testData) = (splits(0), splits(1))  ",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:14:20+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "import org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.util.MLUtils\n\u001b[1m\u001b[34mlabeledPoints\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.mllib.regression.LabeledPoint]\u001b[0m = [label: double, features: vector]\n\u001b[1m\u001b[34msplits\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.sql.Dataset[org.apache.spark.mllib.regression.LabeledPoint]]\u001b[0m = Array([label: double, features: vector], [label: double, features: vector])\n\u001b[1m\u001b[34mtrainingData\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.mllib.regression.LabeledPoint]\u001b[0m = [label: double, features: vector]\n\u001b[1m\u001b[34mtestData\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.mllib.regression.LabeledPoint]\u001b[0m = [label: double, features: vector]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638382593620_569650924",
+   "id": "paragraph_1638382593620_569650924",
+   "dateCreated": "2021-12-01T18:16:33+0000",
+   "dateStarted": "2021-12-01T19:14:20+0000",
+   "dateFinished": "2021-12-01T19:14:21+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1009"
+  },
+  {
+   "title": "Создадим и обучим модель",
+   "text": "import org.apache.spark.mllib.tree.RandomForest\n\nval numClasses = 3\nval categoricalFeaturesInfo = Map[Int, Int]()\nval numTrees = 300\nval featureSubsetStrategy = \"auto\" // Let the algorithm choose.\nval impurity = \"gini\"\nval maxDepth = 5\nval maxBins = 32\n\nval model = RandomForest.trainClassifier(trainingData.rdd, numClasses, categoricalFeaturesInfo, numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins)",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:23:52+0000",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "import org.apache.spark.mllib.tree.RandomForest\n\u001b[1m\u001b[34mnumClasses\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 3\n\u001b[1m\u001b[34mcategoricalFeaturesInfo\u001b[0m: \u001b[1m\u001b[32mscala.collection.immutable.Map[Int,Int]\u001b[0m = Map()\n\u001b[1m\u001b[34mnumTrees\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 300\n\u001b[1m\u001b[34mfeatureSubsetStrategy\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = auto\n\u001b[1m\u001b[34mimpurity\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = gini\n\u001b[1m\u001b[34mmaxDepth\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 5\n\u001b[1m\u001b[34mmaxBins\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 32\n\u001b[1m\u001b[34mmodel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.mllib.tree.model.RandomForestModel\u001b[0m =\nTreeEnsembleModel classifier with 300 trees\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=267",
+       "$$hashKey": "object:2048"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=268",
+       "$$hashKey": "object:2049"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=269",
+       "$$hashKey": "object:2050"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=270",
+       "$$hashKey": "object:2051"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=271",
+       "$$hashKey": "object:2052"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=272",
+       "$$hashKey": "object:2053"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=273",
+       "$$hashKey": "object:2054"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=274",
+       "$$hashKey": "object:2055"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638380759517_1532379124",
+   "id": "paragraph_1638380759517_1532379124",
+   "dateCreated": "2021-12-01T17:45:59+0000",
+   "dateStarted": "2021-12-01T19:14:26+0000",
+   "dateFinished": "2021-12-01T19:14:27+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1010"
+  },
+  {
+   "title": "Проверяем модель на тестовой выборке",
+   "text": "val labelAndPreds = testData.map { point =>\r\n  val prediction = model.predict(point.features)\r\n  (point.label, prediction)\r\n}\r\nval testErr = labelAndPreds.filter(r => r._1 != r._2).count.toDouble / testData.count()\r\nprintln(s\"Test Error = $testErr\")\r\nprintln(s\"Learned classification forest model:\\n ${model.toDebugString}\")",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:23:24+0000",
+   "progress": 100,
+   "config": {
+    "colWidth": 12,
+    "fontSize": 9,
+    "enabled": true,
+    "results": {},
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/scala",
+    "title": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "Test Error = 0.06976744186046512\nLearned classification forest model:\n TreeEnsembleModel classifier with 300 trees\n\n  Tree 0:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.65)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 1:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.75)\n      Predict: 2.0\n     Else (feature 1 > 4.75)\n      If (feature 3 <= 6.05)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 2:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 3:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 4:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 5.75)\n      If (feature 3 <= 5.55)\n       Predict: 2.0\n      Else (feature 3 > 5.55)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        Predict: 0.0\n     Else (feature 3 > 5.75)\n      If (feature 2 <= 2.75)\n       Predict: 0.0\n      Else (feature 2 > 2.75)\n       If (feature 0 <= 1.55)\n        Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 0.0\n  Tree 5:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 6.15)\n        Predict: 0.0\n       Else (feature 3 > 6.15)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 3 <= 6.05)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 6:\n    If (feature 3 <= 5.45)\n     If (feature 2 <= 2.75)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n    Else (feature 3 > 5.45)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       If (feature 2 <= 2.25)\n        Predict: 0.0\n       Else (feature 2 > 2.25)\n        If (feature 1 <= 4.95)\n         Predict: 2.0\n        Else (feature 1 > 4.95)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 7:\n    If (feature 1 <= 4.85)\n     If (feature 0 <= 0.55)\n      Predict: 1.0\n     Else (feature 0 > 0.55)\n      If (feature 2 <= 2.55)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        Predict: 0.0\n      Else (feature 2 > 2.55)\n       Predict: 2.0\n    Else (feature 1 > 4.85)\n     If (feature 3 <= 6.05)\n      If (feature 3 <= 5.85)\n       Predict: 0.0\n      Else (feature 3 > 5.85)\n       Predict: 2.0\n     Else (feature 3 > 6.05)\n      Predict: 0.0\n  Tree 8:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.75)\n      Predict: 2.0\n     Else (feature 1 > 4.75)\n      If (feature 1 <= 5.15)\n       If (feature 0 <= 1.65)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n  Tree 9:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 10:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 11:\n    If (feature 1 <= 4.85)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      Predict: 2.0\n    Else (feature 1 > 4.85)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 6.15)\n       Predict: 0.0\n      Else (feature 3 > 6.15)\n       Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 12:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.75)\n      Predict: 2.0\n     Else (feature 1 > 4.75)\n      If (feature 2 <= 2.75)\n       If (feature 2 <= 2.6500000000000004)\n        If (feature 1 <= 4.95)\n         Predict: 2.0\n        Else (feature 1 > 4.95)\n         Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        Predict: 2.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 13:\n    If (feature 3 <= 5.85)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      If (feature 1 <= 4.55)\n       Predict: 2.0\n      Else (feature 1 > 4.55)\n       Predict: 0.0\n    Else (feature 3 > 5.85)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.55)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n      Else (feature 0 > 1.55)\n       If (feature 3 <= 6.35)\n        Predict: 2.0\n       Else (feature 3 > 6.35)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       Predict: 2.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 14:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 15:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.75)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 16:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 4.95)\n       If (feature 0 <= 1.05)\n        Predict: 2.0\n       Else (feature 0 > 1.05)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        If (feature 3 <= 5.95)\n         Predict: 2.0\n        Else (feature 3 > 5.95)\n         Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 17:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 18:\n    If (feature 3 <= 5.45)\n     If (feature 2 <= 2.45)\n      Predict: 2.0\n     Else (feature 2 > 2.45)\n      Predict: 1.0\n    Else (feature 3 > 5.45)\n     If (feature 2 <= 2.95)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 2 > 2.95)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 0.45)\n        Predict: 1.0\n       Else (feature 0 > 0.45)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 0 <= 1.55)\n        Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 0.0\n  Tree 19:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 3 <= 6.15)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 5.95)\n        Predict: 0.0\n       Else (feature 3 > 5.95)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n     Else (feature 3 > 6.15)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 20:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 1 <= 5.15)\n       If (feature 0 <= 1.65)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n  Tree 21:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.55)\n       If (feature 2 <= 2.8499999999999996)\n        Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 22:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 23:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 5.65)\n      If (feature 1 <= 4.45)\n       Predict: 2.0\n      Else (feature 1 > 4.45)\n       Predict: 0.0\n     Else (feature 3 > 5.65)\n      If (feature 1 <= 4.95)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 24:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        Predict: 2.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 25:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 3 <= 6.85)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 3 > 6.85)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 26:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 27:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.85)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.8499999999999996)\n        If (feature 1 <= 4.85)\n         Predict: 2.0\n        Else (feature 1 > 4.85)\n         Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 5.95)\n        Predict: 2.0\n       Else (feature 3 > 5.95)\n        Predict: 0.0\n     Else (feature 0 > 1.85)\n      Predict: 0.0\n  Tree 28:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 29:\n    If (feature 3 <= 5.55)\n     If (feature 2 <= 2.75)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n    Else (feature 3 > 5.55)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 0.35)\n       Predict: 1.0\n      Else (feature 0 > 0.35)\n       If (feature 3 <= 5.65)\n        If (feature 0 <= 1.35)\n         Predict: 2.0\n        Else (feature 0 > 1.35)\n         Predict: 0.0\n       Else (feature 3 > 5.65)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 30:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.55)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 0 <= 1.65)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n  Tree 31:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 32:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 5.95)\n        Predict: 2.0\n       Else (feature 3 > 5.95)\n        Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 33:\n    If (feature 3 <= 5.45)\n     If (feature 0 <= 0.45)\n      Predict: 1.0\n     Else (feature 0 > 0.45)\n      Predict: 2.0\n    Else (feature 3 > 5.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 3 <= 6.85)\n       If (feature 3 <= 6.05)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 3 > 6.85)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n  Tree 34:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 4.95)\n       If (feature 1 <= 3.5999999999999996)\n        Predict: 2.0\n       Else (feature 1 > 3.5999999999999996)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        If (feature 2 <= 3.05)\n         Predict: 0.0\n        Else (feature 2 > 3.05)\n         Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 3 <= 5.85)\n         Predict: 0.0\n        Else (feature 3 > 5.85)\n         Predict: 2.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 35:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 36:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 1 <= 5.15)\n         Predict: 2.0\n        Else (feature 1 > 5.15)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        If (feature 1 <= 4.85)\n         Predict: 2.0\n        Else (feature 1 > 4.85)\n         Predict: 0.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 37:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 6.15)\n        Predict: 0.0\n       Else (feature 3 > 6.15)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.75)\n        Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 38:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.85)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.55)\n       If (feature 2 <= 2.8499999999999996)\n        Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 39:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.55)\n      If (feature 3 <= 6.15)\n       Predict: 2.0\n      Else (feature 3 > 6.15)\n       If (feature 3 <= 6.35)\n        If (feature 2 <= 2.55)\n         Predict: 2.0\n        Else (feature 2 > 2.55)\n         Predict: 0.0\n       Else (feature 3 > 6.35)\n        Predict: 2.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.75)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 1 > 4.75)\n       Predict: 0.0\n  Tree 40:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.85)\n       If (feature 3 <= 4.95)\n        If (feature 2 <= 2.45)\n         Predict: 2.0\n        Else (feature 2 > 2.45)\n         Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 41:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 6.15)\n      If (feature 1 <= 4.75)\n       If (feature 2 <= 2.55)\n        If (feature 0 <= 1.35)\n         Predict: 2.0\n        Else (feature 0 > 1.35)\n         Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.75)\n       If (feature 0 <= 1.65)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n     Else (feature 3 > 6.15)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 42:\n    If (feature 3 <= 5.75)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      If (feature 1 <= 4.55)\n       Predict: 2.0\n      Else (feature 1 > 4.55)\n       Predict: 0.0\n    Else (feature 3 > 5.75)\n     If (feature 0 <= 1.55)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.75)\n       Predict: 2.0\n      Else (feature 1 > 4.75)\n       Predict: 0.0\n  Tree 43:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 44:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.75)\n      Predict: 2.0\n     Else (feature 1 > 4.75)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.35)\n        Predict: 2.0\n       Else (feature 3 > 6.35)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 45:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 3 <= 6.25)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        If (feature 3 <= 4.95)\n         Predict: 0.0\n        Else (feature 3 > 4.95)\n         Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n     Else (feature 3 > 6.25)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 46:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 2 <= 2.6500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        If (feature 2 <= 3.1500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 3.1500000000000004)\n         Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 47:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 6.25)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       If (feature 1 <= 4.75)\n        Predict: 2.0\n       Else (feature 1 > 4.75)\n        Predict: 0.0\n     Else (feature 3 > 6.25)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 48:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 3 <= 6.85)\n       If (feature 2 <= 2.8499999999999996)\n        If (feature 1 <= 4.95)\n         Predict: 2.0\n        Else (feature 1 > 4.95)\n         Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 3 > 6.85)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 1 <= 4.85)\n        If (feature 0 <= 1.75)\n         Predict: 0.0\n        Else (feature 0 > 1.75)\n         Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 49:\n    If (feature 3 <= 5.75)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n    Else (feature 3 > 5.75)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.25)\n       Predict: 1.0\n      Else (feature 0 > 0.25)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.95)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 3 > 6.95)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 50:\n    If (feature 3 <= 5.55)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      If (feature 2 <= 2.55)\n       Predict: 0.0\n      Else (feature 2 > 2.55)\n       Predict: 2.0\n    Else (feature 3 > 5.55)\n     If (feature 2 <= 2.75)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 51:\n    If (feature 3 <= 5.35)\n     If (feature 2 <= 2.75)\n      Predict: 2.0\n     Else (feature 2 > 2.75)\n      Predict: 1.0\n    Else (feature 3 > 5.35)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 52:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 53:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      If (feature 2 <= 2.55)\n       If (feature 2 <= 2.45)\n        Predict: 2.0\n       Else (feature 2 > 2.45)\n        Predict: 0.0\n      Else (feature 2 > 2.55)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.75)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 54:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.75)\n      Predict: 2.0\n     Else (feature 1 > 4.75)\n      If (feature 3 <= 6.05)\n       If (feature 0 <= 1.65)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 55:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        If (feature 3 <= 7.05)\n         Predict: 2.0\n        Else (feature 3 > 7.05)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 2 <= 3.1500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 3.1500000000000004)\n        Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 56:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 4.95)\n       If (feature 0 <= 1.05)\n        Predict: 2.0\n       Else (feature 0 > 1.05)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 3 <= 6.05)\n       If (feature 3 <= 5.95)\n        Predict: 0.0\n       Else (feature 3 > 5.95)\n        If (feature 1 <= 5.05)\n         Predict: 0.0\n        Else (feature 1 > 5.05)\n         Predict: 2.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 57:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.85)\n      If (feature 2 <= 2.55)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        Predict: 0.0\n      Else (feature 2 > 2.55)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.6500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 58:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        If (feature 1 <= 5.05)\n         Predict: 0.0\n        Else (feature 1 > 5.05)\n         Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 59:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 60:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      If (feature 3 <= 4.95)\n       If (feature 2 <= 2.45)\n        Predict: 2.0\n       Else (feature 2 > 2.45)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 3 <= 6.85)\n       Predict: 0.0\n      Else (feature 3 > 6.85)\n       If (feature 3 <= 6.95)\n        If (feature 2 <= 3.1500000000000004)\n         Predict: 2.0\n        Else (feature 2 > 3.1500000000000004)\n         Predict: 0.0\n       Else (feature 3 > 6.95)\n        Predict: 0.0\n  Tree 61:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 6.35)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 1 <= 4.85)\n        If (feature 3 <= 4.95)\n         Predict: 0.0\n        Else (feature 3 > 4.95)\n         Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n     Else (feature 3 > 6.35)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 62:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 63:\n    If (feature 3 <= 5.75)\n     If (feature 2 <= 2.8499999999999996)\n      If (feature 1 <= 4.25)\n       Predict: 2.0\n      Else (feature 1 > 4.25)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n     Else (feature 2 > 2.8499999999999996)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n    Else (feature 3 > 5.75)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.25)\n       Predict: 1.0\n      Else (feature 0 > 0.25)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 1 <= 4.95)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 64:\n    If (feature 3 <= 5.75)\n     If (feature 1 <= 1.7999999999999998)\n      Predict: 1.0\n     Else (feature 1 > 1.7999999999999998)\n      Predict: 2.0\n    Else (feature 3 > 5.75)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 65:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 66:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.65)\n        If (feature 2 <= 2.6500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 2.6500000000000004)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 67:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      Predict: 0.0\n  Tree 68:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 69:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 2 <= 2.6500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 70:\n    If (feature 3 <= 5.55)\n     If (feature 1 <= 1.7999999999999998)\n      Predict: 1.0\n     Else (feature 1 > 1.7999999999999998)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n    Else (feature 3 > 5.55)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.55)\n       If (feature 0 <= 0.45)\n        Predict: 1.0\n       Else (feature 0 > 0.45)\n        Predict: 2.0\n      Else (feature 0 > 1.55)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 71:\n    If (feature 3 <= 5.75)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       Predict: 0.0\n    Else (feature 3 > 5.75)\n     If (feature 0 <= 1.85)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 2 <= 2.75)\n        If (feature 2 <= 2.6500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 2.6500000000000004)\n         Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n     Else (feature 0 > 1.85)\n      Predict: 0.0\n  Tree 72:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 73:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 5.15)\n       Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 74:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 75:\n    If (feature 3 <= 5.55)\n     If (feature 1 <= 1.7999999999999998)\n      Predict: 1.0\n     Else (feature 1 > 1.7999999999999998)\n      Predict: 2.0\n    Else (feature 3 > 5.55)\n     If (feature 1 <= 4.95)\n      If (feature 2 <= 3.45)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        If (feature 0 <= 1.55)\n         Predict: 2.0\n        Else (feature 0 > 1.55)\n         Predict: 0.0\n      Else (feature 2 > 3.45)\n       Predict: 1.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.75)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 76:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 77:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 3 <= 6.15)\n        If (feature 1 <= 5.15)\n         Predict: 2.0\n        Else (feature 1 > 5.15)\n         Predict: 0.0\n       Else (feature 3 > 6.15)\n        Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 78:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 1 <= 4.85)\n       If (feature 3 <= 4.95)\n        If (feature 0 <= 1.05)\n         Predict: 2.0\n        Else (feature 0 > 1.05)\n         Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 5.65)\n        Predict: 0.0\n       Else (feature 3 > 5.65)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 79:\n    If (feature 3 <= 5.55)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n    Else (feature 3 > 5.55)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        If (feature 1 <= 4.95)\n         Predict: 2.0\n        Else (feature 1 > 4.95)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 80:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      If (feature 2 <= 2.55)\n       If (feature 0 <= 1.15)\n        Predict: 2.0\n       Else (feature 0 > 1.15)\n        Predict: 0.0\n      Else (feature 2 > 2.55)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.75)\n        If (feature 0 <= 1.45)\n         Predict: 0.0\n        Else (feature 0 > 1.45)\n         Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 81:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 1 <= 4.95)\n       If (feature 2 <= 2.55)\n        Predict: 2.0\n       Else (feature 2 > 2.55)\n        Predict: 0.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 82:\n    If (feature 1 <= 4.95)\n     If (feature 3 <= 5.45)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n     Else (feature 3 > 5.45)\n      If (feature 1 <= 1.55)\n       Predict: 1.0\n      Else (feature 1 > 1.55)\n       Predict: 2.0\n    Else (feature 1 > 4.95)\n     If (feature 2 <= 2.75)\n      If (feature 2 <= 2.6500000000000004)\n       Predict: 0.0\n      Else (feature 2 > 2.6500000000000004)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        Predict: 2.0\n     Else (feature 2 > 2.75)\n      Predict: 0.0\n  Tree 83:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 5.15)\n       Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 84:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.65)\n        If (feature 0 <= 1.45)\n         Predict: 0.0\n        Else (feature 0 > 1.45)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 85:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 86:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 87:\n    If (feature 3 <= 5.45)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n    Else (feature 3 > 5.45)\n     If (feature 0 <= 1.85)\n      If (feature 1 <= 5.15)\n       If (feature 0 <= 0.25)\n        Predict: 1.0\n       Else (feature 0 > 0.25)\n        Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n     Else (feature 0 > 1.85)\n      Predict: 0.0\n  Tree 88:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 5.15)\n       If (feature 2 <= 2.25)\n        Predict: 0.0\n       Else (feature 2 > 2.25)\n        Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 3 <= 5.95)\n        Predict: 2.0\n       Else (feature 3 > 5.95)\n        Predict: 0.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 89:\n    If (feature 3 <= 5.75)\n     If (feature 2 <= 2.8499999999999996)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n     Else (feature 2 > 2.8499999999999996)\n      If (feature 0 <= 0.55)\n       Predict: 1.0\n      Else (feature 0 > 0.55)\n       Predict: 2.0\n    Else (feature 3 > 5.75)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 0.25)\n       Predict: 1.0\n      Else (feature 0 > 0.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 90:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.85)\n      If (feature 3 <= 4.95)\n       If (feature 0 <= 1.05)\n        Predict: 2.0\n       Else (feature 0 > 1.05)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 3 <= 6.05)\n       If (feature 0 <= 1.65)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 3 > 6.05)\n       If (feature 0 <= 1.55)\n        If (feature 3 <= 6.35)\n         Predict: 0.0\n        Else (feature 3 > 6.35)\n         Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 0.0\n  Tree 91:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 3 <= 5.75)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 3 > 5.75)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 92:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      Predict: 0.0\n  Tree 93:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        If (feature 3 <= 7.05)\n         Predict: 2.0\n        Else (feature 3 > 7.05)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 0 <= 1.85)\n        If (feature 0 <= 1.75)\n         Predict: 0.0\n        Else (feature 0 > 1.75)\n         Predict: 2.0\n       Else (feature 0 > 1.85)\n        Predict: 0.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 94:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 2 <= 3.1500000000000004)\n       Predict: 0.0\n      Else (feature 2 > 3.1500000000000004)\n       If (feature 0 <= 1.85)\n        Predict: 2.0\n       Else (feature 0 > 1.85)\n        Predict: 0.0\n  Tree 95:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 96:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 2 <= 2.25)\n        Predict: 0.0\n       Else (feature 2 > 2.25)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 97:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 3 <= 6.25)\n      If (feature 1 <= 4.85)\n       If (feature 3 <= 4.95)\n        If (feature 2 <= 2.45)\n         Predict: 2.0\n        Else (feature 2 > 2.45)\n         Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n     Else (feature 3 > 6.25)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n  Tree 98:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 99:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        If (feature 2 <= 3.05)\n         Predict: 0.0\n        Else (feature 2 > 3.05)\n         Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 100:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 6.15)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n     Else (feature 3 > 6.15)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 101:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.75)\n      Predict: 2.0\n     Else (feature 1 > 4.75)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.65)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       If (feature 3 <= 6.75)\n        Predict: 0.0\n       Else (feature 3 > 6.75)\n        If (feature 0 <= 1.55)\n         Predict: 2.0\n        Else (feature 0 > 1.55)\n         Predict: 0.0\n  Tree 102:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 103:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 104:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 5.15)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.25)\n        Predict: 0.0\n       Else (feature 2 > 2.25)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 5.15)\n      Predict: 0.0\n  Tree 105:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 5.95)\n        Predict: 2.0\n       Else (feature 3 > 5.95)\n        Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 1 <= 5.15)\n         Predict: 2.0\n        Else (feature 1 > 5.15)\n         Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 106:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.75)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 107:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.85)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       If (feature 1 <= 4.95)\n        If (feature 3 <= 4.95)\n         Predict: 0.0\n        Else (feature 3 > 4.95)\n         Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.85)\n      Predict: 0.0\n  Tree 108:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.85)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        If (feature 3 <= 6.15)\n         Predict: 0.0\n        Else (feature 3 > 6.15)\n         Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 109:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 110:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.55)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.85)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 111:\n    If (feature 3 <= 5.55)\n     If (feature 2 <= 2.75)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      If (feature 1 <= 1.7999999999999998)\n       Predict: 1.0\n      Else (feature 1 > 1.7999999999999998)\n       Predict: 2.0\n    Else (feature 3 > 5.55)\n     If (feature 2 <= 3.45)\n      If (feature 3 <= 6.85)\n       If (feature 2 <= 2.95)\n        If (feature 0 <= 1.55)\n         Predict: 2.0\n        Else (feature 0 > 1.55)\n         Predict: 0.0\n       Else (feature 2 > 2.95)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n      Else (feature 3 > 6.85)\n       If (feature 0 <= 1.45)\n        Predict: 2.0\n       Else (feature 0 > 1.45)\n        Predict: 0.0\n     Else (feature 2 > 3.45)\n      Predict: 1.0\n  Tree 112:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.25)\n        Predict: 0.0\n       Else (feature 2 > 2.25)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 113:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.55)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 114:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 115:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        Predict: 2.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 116:\n    If (feature 3 <= 5.45)\n     If (feature 1 <= 1.7999999999999998)\n      Predict: 1.0\n     Else (feature 1 > 1.7999999999999998)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n    Else (feature 3 > 5.45)\n     If (feature 0 <= 1.55)\n      If (feature 0 <= 0.35)\n       Predict: 1.0\n      Else (feature 0 > 0.35)\n       If (feature 1 <= 4.75)\n        Predict: 2.0\n       Else (feature 1 > 4.75)\n        Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 3 <= 6.35)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n      Else (feature 3 > 6.35)\n       Predict: 0.0\n  Tree 117:\n    If (feature 0 <= 1.65)\n     If (feature 0 <= 0.55)\n      Predict: 1.0\n     Else (feature 0 > 0.55)\n      If (feature 3 <= 6.95)\n       If (feature 2 <= 2.8499999999999996)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 3 > 6.95)\n       Predict: 0.0\n    Else (feature 0 > 1.65)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.75)\n       Predict: 0.0\n      Else (feature 0 > 1.75)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      Predict: 0.0\n  Tree 118:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        If (feature 2 <= 2.55)\n         Predict: 2.0\n        Else (feature 2 > 2.55)\n         Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 119:\n    If (feature 1 <= 4.95)\n     If (feature 2 <= 3.3499999999999996)\n      If (feature 0 <= 0.25)\n       Predict: 1.0\n      Else (feature 0 > 0.25)\n       If (feature 3 <= 5.65)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n       Else (feature 3 > 5.65)\n        Predict: 2.0\n     Else (feature 2 > 3.3499999999999996)\n      Predict: 1.0\n    Else (feature 1 > 4.95)\n     If (feature 2 <= 2.75)\n      If (feature 3 <= 6.05)\n       If (feature 0 <= 1.65)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      Predict: 0.0\n  Tree 120:\n    If (feature 0 <= 1.65)\n     If (feature 0 <= 0.45)\n      Predict: 1.0\n     Else (feature 0 > 0.45)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n    Else (feature 0 > 1.65)\n     Predict: 0.0\n  Tree 121:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.55)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 122:\n    If (feature 3 <= 5.55)\n     If (feature 2 <= 2.75)\n      If (feature 1 <= 4.45)\n       Predict: 2.0\n      Else (feature 1 > 4.45)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      Predict: 1.0\n    Else (feature 3 > 5.55)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        If (feature 2 <= 2.55)\n         Predict: 2.0\n        Else (feature 2 > 2.55)\n         Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 123:\n    If (feature 1 <= 4.85)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      Predict: 2.0\n    Else (feature 1 > 4.85)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.45)\n        Predict: 0.0\n       Else (feature 0 > 1.45)\n        Predict: 2.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 124:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 1 <= 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 0.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 125:\n    If (feature 3 <= 5.45)\n     If (feature 0 <= 0.55)\n      Predict: 1.0\n     Else (feature 0 > 0.55)\n      Predict: 2.0\n    Else (feature 3 > 5.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.6500000000000004)\n        If (feature 2 <= 2.55)\n         Predict: 2.0\n        Else (feature 2 > 2.55)\n         Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 126:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 0 <= 1.55)\n        If (feature 3 <= 6.05)\n         Predict: 0.0\n        Else (feature 3 > 6.05)\n         Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 127:\n    If (feature 1 <= 4.85)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      If (feature 3 <= 4.95)\n       If (feature 2 <= 2.45)\n        Predict: 2.0\n       Else (feature 2 > 2.45)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n    Else (feature 1 > 4.85)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 128:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 129:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 130:\n    If (feature 1 <= 4.85)\n     If (feature 0 <= 0.55)\n      Predict: 1.0\n     Else (feature 0 > 0.55)\n      Predict: 2.0\n    Else (feature 1 > 4.85)\n     If (feature 3 <= 6.05)\n      If (feature 0 <= 1.65)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 3 > 6.05)\n      Predict: 0.0\n  Tree 131:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.55)\n       Predict: 2.0\n      Else (feature 2 > 2.55)\n       If (feature 1 <= 4.95)\n        If (feature 3 <= 6.15)\n         Predict: 0.0\n        Else (feature 3 > 6.15)\n         Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n  Tree 132:\n    If (feature 3 <= 5.75)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      If (feature 1 <= 4.55)\n       If (feature 2 <= 2.55)\n        If (feature 2 <= 2.45)\n         Predict: 2.0\n        Else (feature 2 > 2.45)\n         Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.55)\n       Predict: 0.0\n    Else (feature 3 > 5.75)\n     If (feature 1 <= 4.85)\n      If (feature 2 <= 3.45)\n       Predict: 2.0\n      Else (feature 2 > 3.45)\n       Predict: 1.0\n     Else (feature 1 > 4.85)\n      Predict: 0.0\n  Tree 133:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.85)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        If (feature 0 <= 1.75)\n         Predict: 0.0\n        Else (feature 0 > 1.75)\n         Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        If (feature 1 <= 5.15)\n         Predict: 2.0\n        Else (feature 1 > 5.15)\n         Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 134:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       If (feature 3 <= 6.95)\n        If (feature 2 <= 2.8499999999999996)\n         Predict: 0.0\n        Else (feature 2 > 2.8499999999999996)\n         Predict: 2.0\n       Else (feature 3 > 6.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 135:\n    If (feature 1 <= 4.75)\n     If (feature 0 <= 0.45)\n      Predict: 1.0\n     Else (feature 0 > 0.45)\n      Predict: 2.0\n    Else (feature 1 > 4.75)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 136:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.55)\n       Predict: 2.0\n      Else (feature 2 > 2.55)\n       Predict: 0.0\n  Tree 137:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 2 <= 2.6500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 138:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.85)\n       Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        If (feature 1 <= 5.05)\n         Predict: 0.0\n        Else (feature 1 > 5.05)\n         Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 139:\n    If (feature 3 <= 5.45)\n     If (feature 2 <= 2.75)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n    Else (feature 3 > 5.45)\n     If (feature 2 <= 3.45)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.6500000000000004)\n        If (feature 1 <= 4.95)\n         Predict: 2.0\n        Else (feature 1 > 4.95)\n         Predict: 0.0\n       Else (feature 2 > 2.6500000000000004)\n        Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 2 > 3.45)\n      Predict: 1.0\n  Tree 140:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 3 <= 5.75)\n      Predict: 2.0\n     Else (feature 3 > 5.75)\n      If (feature 2 <= 3.05)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n      Else (feature 2 > 3.05)\n       If (feature 0 <= 1.85)\n        Predict: 2.0\n       Else (feature 0 > 1.85)\n        Predict: 0.0\n  Tree 141:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 0 <= 1.55)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       Predict: 2.0\n     Else (feature 0 > 1.55)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 142:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.95)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 5.65)\n        Predict: 0.0\n       Else (feature 3 > 5.65)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 3 <= 6.05)\n       If (feature 2 <= 2.75)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 143:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 3 <= 6.05)\n      If (feature 0 <= 1.85)\n       Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 3 > 6.05)\n      If (feature 1 <= 4.95)\n       If (feature 3 <= 6.15)\n        If (feature 2 <= 2.8499999999999996)\n         Predict: 2.0\n        Else (feature 2 > 2.8499999999999996)\n         Predict: 0.0\n       Else (feature 3 > 6.15)\n        Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 144:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 1 <= 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 0.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 145:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 1 <= 4.85)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 146:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.75)\n       Predict: 2.0\n      Else (feature 1 > 4.75)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 147:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.95)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 0 <= 1.55)\n        Predict: 2.0\n       Else (feature 0 > 1.55)\n        Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 3 <= 6.05)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 148:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 149:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 7.05)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 3 > 7.05)\n      Predict: 0.0\n  Tree 150:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.55)\n       If (feature 3 <= 6.05)\n        Predict: 0.0\n       Else (feature 3 > 6.05)\n        Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 151:\n    If (feature 3 <= 5.55)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      If (feature 1 <= 3.95)\n       Predict: 2.0\n      Else (feature 1 > 3.95)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n    Else (feature 3 > 5.55)\n     If (feature 0 <= 1.85)\n      If (feature 2 <= 2.6500000000000004)\n       Predict: 0.0\n      Else (feature 2 > 2.6500000000000004)\n       If (feature 1 <= 4.85)\n        If (feature 2 <= 3.45)\n         Predict: 2.0\n        Else (feature 2 > 3.45)\n         Predict: 1.0\n       Else (feature 1 > 4.85)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n     Else (feature 0 > 1.85)\n      Predict: 0.0\n  Tree 152:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 3 <= 5.75)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 3 > 5.75)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 153:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 6.35)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        If (feature 0 <= 1.85)\n         Predict: 2.0\n        Else (feature 0 > 1.85)\n         Predict: 0.0\n     Else (feature 3 > 6.35)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 154:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 3 <= 5.75)\n      Predict: 2.0\n     Else (feature 3 > 5.75)\n      If (feature 0 <= 1.55)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n      Else (feature 0 > 1.55)\n       If (feature 0 <= 1.85)\n        If (feature 3 <= 5.95)\n         Predict: 2.0\n        Else (feature 3 > 5.95)\n         Predict: 0.0\n       Else (feature 0 > 1.85)\n        Predict: 0.0\n  Tree 155:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.85)\n      Predict: 0.0\n  Tree 156:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 157:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 3 <= 7.05)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n      Else (feature 3 > 7.05)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 158:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 159:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 2.55)\n        Predict: 0.0\n       Else (feature 2 > 2.55)\n        Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        If (feature 0 <= 1.55)\n         Predict: 0.0\n        Else (feature 0 > 1.55)\n         Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 160:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 6.05)\n      If (feature 0 <= 1.85)\n       Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 3 > 6.05)\n      If (feature 1 <= 4.95)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 161:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.45)\n      Predict: 2.0\n     Else (feature 0 > 1.45)\n      If (feature 1 <= 4.75)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 1 > 4.75)\n       Predict: 0.0\n  Tree 162:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 2 <= 3.25)\n      If (feature 0 <= 1.65)\n       If (feature 0 <= 1.45)\n        Predict: 2.0\n       Else (feature 0 > 1.45)\n        If (feature 3 <= 6.05)\n         Predict: 0.0\n        Else (feature 3 > 6.05)\n         Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 2 > 3.25)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 163:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 164:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 1 <= 5.15)\n       If (feature 3 <= 6.55)\n        If (feature 0 <= 1.65)\n         Predict: 2.0\n        Else (feature 0 > 1.65)\n         Predict: 0.0\n       Else (feature 3 > 6.55)\n        Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n  Tree 165:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 166:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 1 <= 4.85)\n      If (feature 2 <= 2.55)\n       If (feature 3 <= 4.95)\n        If (feature 1 <= 3.5999999999999996)\n         Predict: 2.0\n        Else (feature 1 > 3.5999999999999996)\n         Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 2 > 2.55)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 3 <= 5.85)\n         Predict: 0.0\n        Else (feature 3 > 5.85)\n         Predict: 2.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 167:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 168:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 0 <= 1.35)\n       Predict: 2.0\n      Else (feature 0 > 1.35)\n       If (feature 3 <= 7.05)\n        If (feature 2 <= 2.6500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 2.6500000000000004)\n         Predict: 2.0\n       Else (feature 3 > 7.05)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 169:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.55)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.55)\n      If (feature 2 <= 3.25)\n       Predict: 0.0\n      Else (feature 2 > 3.25)\n       If (feature 1 <= 4.75)\n        Predict: 2.0\n       Else (feature 1 > 4.75)\n        Predict: 0.0\n  Tree 170:\n    If (feature 1 <= 4.85)\n     If (feature 3 <= 5.45)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n     Else (feature 3 > 5.45)\n      If (feature 2 <= 3.45)\n       Predict: 2.0\n      Else (feature 2 > 3.45)\n       Predict: 1.0\n    Else (feature 1 > 4.85)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 2 <= 2.75)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 171:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 6.45)\n      If (feature 1 <= 4.85)\n       If (feature 3 <= 4.95)\n        If (feature 0 <= 1.05)\n         Predict: 2.0\n        Else (feature 0 > 1.05)\n         Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 0 <= 1.65)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n     Else (feature 3 > 6.45)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 172:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 3 <= 6.05)\n        Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 173:\n    If (feature 3 <= 5.45)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      If (feature 3 <= 4.95)\n       Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n    Else (feature 3 > 5.45)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       If (feature 2 <= 3.45)\n        Predict: 2.0\n       Else (feature 2 > 3.45)\n        Predict: 1.0\n      Else (feature 1 > 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 2 <= 2.75)\n         Predict: 2.0\n        Else (feature 2 > 2.75)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 2 <= 3.1500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 3.1500000000000004)\n        Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 174:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.05)\n        If (feature 2 <= 2.25)\n         Predict: 0.0\n        Else (feature 2 > 2.25)\n         Predict: 2.0\n       Else (feature 3 > 6.05)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 175:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 6.15)\n      If (feature 0 <= 1.55)\n       If (feature 0 <= 1.35)\n        Predict: 2.0\n       Else (feature 0 > 1.35)\n        If (feature 2 <= 2.6500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 2.6500000000000004)\n         Predict: 2.0\n      Else (feature 0 > 1.55)\n       If (feature 1 <= 4.85)\n        If (feature 0 <= 1.75)\n         Predict: 0.0\n        Else (feature 0 > 1.75)\n         Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n     Else (feature 3 > 6.15)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 176:\n    If (feature 3 <= 5.45)\n     If (feature 0 <= 0.8)\n      Predict: 1.0\n     Else (feature 0 > 0.8)\n      Predict: 0.0\n    Else (feature 3 > 5.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 3.3499999999999996)\n       If (feature 0 <= 1.55)\n        Predict: 2.0\n       Else (feature 0 > 1.55)\n        If (feature 3 <= 6.35)\n         Predict: 2.0\n        Else (feature 3 > 6.35)\n         Predict: 0.0\n      Else (feature 2 > 3.3499999999999996)\n       Predict: 1.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 177:\n    If (feature 3 <= 5.75)\n     If (feature 1 <= 2.45)\n      Predict: 1.0\n     Else (feature 1 > 2.45)\n      If (feature 3 <= 4.95)\n       If (feature 1 <= 3.5999999999999996)\n        Predict: 2.0\n       Else (feature 1 > 3.5999999999999996)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n    Else (feature 3 > 5.75)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.25)\n       Predict: 1.0\n      Else (feature 0 > 0.25)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 2 <= 2.55)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n      Else (feature 2 > 2.55)\n       Predict: 0.0\n  Tree 178:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 5.15)\n       Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 179:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 180:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 3 <= 7.05)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        If (feature 3 <= 5.95)\n         Predict: 2.0\n        Else (feature 3 > 5.95)\n         Predict: 0.0\n     Else (feature 3 > 7.05)\n      Predict: 0.0\n  Tree 181:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 182:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 3 <= 7.05)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n      Else (feature 3 > 7.05)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 183:\n    If (feature 3 <= 5.45)\n     If (feature 2 <= 2.75)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n     Else (feature 2 > 2.75)\n      Predict: 1.0\n    Else (feature 3 > 5.45)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 3.45)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 2 > 3.45)\n       Predict: 1.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 184:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 1 <= 5.15)\n       If (feature 2 <= 2.8499999999999996)\n        Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n  Tree 185:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 186:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 0 <= 1.65)\n      If (feature 3 <= 7.05)\n       Predict: 2.0\n      Else (feature 3 > 7.05)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 187:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 3 <= 6.95)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 1 <= 4.95)\n        If (feature 0 <= 1.55)\n         Predict: 2.0\n        Else (feature 0 > 1.55)\n         Predict: 0.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 3 > 6.95)\n      Predict: 0.0\n  Tree 188:\n    If (feature 3 <= 5.45)\n     If (feature 2 <= 2.55)\n      If (feature 0 <= 1.05)\n       Predict: 2.0\n      Else (feature 0 > 1.05)\n       Predict: 0.0\n     Else (feature 2 > 2.55)\n      If (feature 0 <= 0.8)\n       Predict: 1.0\n      Else (feature 0 > 0.8)\n       Predict: 2.0\n    Else (feature 3 > 5.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 0.45)\n       Predict: 1.0\n      Else (feature 0 > 0.45)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 189:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 2 <= 3.1500000000000004)\n        Predict: 0.0\n       Else (feature 2 > 3.1500000000000004)\n        Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 190:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.85)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 2 <= 2.75)\n        If (feature 2 <= 2.6500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 2.6500000000000004)\n         Predict: 2.0\n       Else (feature 2 > 2.75)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 191:\n    If (feature 1 <= 1.7999999999999998)\n     Predict: 1.0\n    Else (feature 1 > 1.7999999999999998)\n     If (feature 2 <= 2.95)\n      If (feature 3 <= 6.55)\n       If (feature 0 <= 1.65)\n        Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 3 > 6.55)\n       Predict: 0.0\n     Else (feature 2 > 2.95)\n      If (feature 0 <= 1.55)\n       Predict: 2.0\n      Else (feature 0 > 1.55)\n       Predict: 0.0\n  Tree 192:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 5.75)\n      If (feature 1 <= 4.45)\n       Predict: 2.0\n      Else (feature 1 > 4.45)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n     Else (feature 3 > 5.75)\n      If (feature 1 <= 4.95)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        If (feature 0 <= 1.55)\n         Predict: 2.0\n        Else (feature 0 > 1.55)\n         Predict: 0.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n  Tree 193:\n    If (feature 3 <= 5.45)\n     If (feature 0 <= 0.55)\n      Predict: 1.0\n     Else (feature 0 > 0.55)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       Predict: 0.0\n    Else (feature 3 > 5.45)\n     If (feature 1 <= 4.95)\n      If (feature 2 <= 3.3499999999999996)\n       If (feature 1 <= 4.75)\n        Predict: 2.0\n       Else (feature 1 > 4.75)\n        If (feature 0 <= 1.55)\n         Predict: 2.0\n        Else (feature 0 > 1.55)\n         Predict: 0.0\n      Else (feature 2 > 3.3499999999999996)\n       Predict: 1.0\n     Else (feature 1 > 4.95)\n      Predict: 0.0\n  Tree 194:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 3 <= 6.15)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n     Else (feature 3 > 6.15)\n      If (feature 0 <= 1.65)\n       Predict: 2.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 195:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 2 <= 2.6500000000000004)\n      If (feature 1 <= 3.15)\n       Predict: 2.0\n      Else (feature 1 > 3.15)\n       Predict: 0.0\n     Else (feature 2 > 2.6500000000000004)\n      If (feature 1 <= 4.85)\n       Predict: 2.0\n      Else (feature 1 > 4.85)\n       If (feature 1 <= 4.95)\n        If (feature 3 <= 6.15)\n         Predict: 0.0\n        Else (feature 3 > 6.15)\n         Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n  Tree 196:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 3 <= 5.95)\n       Predict: 2.0\n      Else (feature 3 > 5.95)\n       If (feature 3 <= 6.35)\n        If (feature 1 <= 4.95)\n         Predict: 2.0\n        Else (feature 1 > 4.95)\n         Predict: 0.0\n       Else (feature 3 > 6.35)\n        Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 0 <= 1.75)\n        Predict: 0.0\n       Else (feature 0 > 1.75)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 197:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.95)\n      If (feature 0 <= 1.85)\n       Predict: 2.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n     Else (feature 1 > 4.95)\n      If (feature 3 <= 6.05)\n       If (feature 3 <= 5.85)\n        Predict: 0.0\n       Else (feature 3 > 5.85)\n        Predict: 2.0\n      Else (feature 3 > 6.05)\n       Predict: 0.0\n  Tree 198:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.55)\n      If (feature 0 <= 1.45)\n       Predict: 2.0\n      Else (feature 0 > 1.45)\n       If (feature 2 <= 2.8499999999999996)\n        Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n     Else (feature 0 > 1.55)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 5.15)\n        Predict: 2.0\n       Else (feature 1 > 5.15)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 199:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 1 <= 4.95)\n      Predict: 2.0\n     Else (feature 1 > 4.95)\n      If (feature 2 <= 2.75)\n       If (feature 0 <= 1.65)\n        If (feature 1 <= 5.05)\n         Predict: 0.0\n        Else (feature 1 > 5.05)\n         Predict: 2.0\n       Else (feature 0 > 1.65)\n        Predict: 0.0\n      Else (feature 2 > 2.75)\n       Predict: 0.0\n  Tree 200:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 1 <= 4.85)\n      If (feature 3 <= 4.95)\n       If (feature 0 <= 1.05)\n        Predict: 2.0\n       Else (feature 0 > 1.05)\n        Predict: 0.0\n      Else (feature 3 > 4.95)\n       Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n      Else (feature 0 > 1.65)\n       Predict: 0.0\n  Tree 201:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 1 <= 4.95)\n        Predict: 2.0\n       Else (feature 1 > 4.95)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 1 <= 4.85)\n       If (feature 3 <= 4.95)\n        Predict: 0.0\n       Else (feature 3 > 4.95)\n        Predict: 2.0\n      Else (feature 1 > 4.85)\n       Predict: 0.0\n  Tree 202:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 5.15)\n       Predict: 2.0\n      Else (feature 1 > 5.15)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 2 <= 2.8499999999999996)\n        Predict: 0.0\n       Else (feature 2 > 2.8499999999999996)\n        Predict: 2.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 203:\n    If (feature 1 <= 2.45)\n     Predict: 1.0\n    Else (feature 1 > 2.45)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       Predict: 0.0\n     Else (feature 0 > 1.65)\n      If (feature 0 <= 1.85)\n       If (feature 1 <= 4.85)\n        Predict: 2.0\n       Else (feature 1 > 4.85)\n        Predict: 0.0\n      Else (feature 0 > 1.85)\n       Predict: 0.0\n  Tree 204:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 2 <= 2.25)\n       Predict: 0.0\n      Else (feature 2 > 2.25)\n       If (feature 3 <= 7.05)\n        Predict: 2.0\n       Else (feature 3 > 7.05)\n        Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 205:\n    If (feature 0 <= 0.55)\n     Predict: 1.0\n    Else (feature 0 > 0.55)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        If (feature 3 <= 6.05)\n         Predict: 2.0\n        Else (feature 3 > 6.05)\n         Predict: 0.0\n     Else (feature 0 > 1.65)\n      Predict: 0.0\n  Tree 206:\n    If (feature 0 <= 0.8)\n     Predict: 1.0\n    Else (feature 0 > 0.8)\n     If (feature 0 <= 1.65)\n      If (feature 1 <= 4.95)\n       Predict: 2.0\n      Else (feature 1 > 4.95)\n       If (feature 0 <= 1.55)\n        Predict: 0.0\n       Else (feature 0 > 1.55)\n        Predict: 2.0\n     Else (feature 0 > 1.65)\n      If (feature 3 <= 5.95)\n       If (feature 2 <= 3.05)\n        Predict: 0.0\n       Else (feature 2 > 3.05)\n        Predict: 2.0\n      Else (feature 3 > 5.95)\n       Predict: 0.0\n  Tree 207:\n    If (feature 0 <= 0.45)\n     Predict: 1.0\n    Else (feature 0 > 0.45)\n     If (feature 1 <= 4.85)\n      Predict: 2.0\n     Else (feature 1 > 4.85)\n      If (feature 0 <= 1.65)\n       If (feature 3 <= 6.35)\n        If (feature 2 <= 2.6500000000000004)\n         Predict: 0.0\n        Else (feature 2 > 2.6500000000000004)"
+     },
+     {
+      "type": "HTML",
+      "data": "<div class=\"result-alert alert-warning\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Output is truncated</strong> to 102400 bytes. Learn more about <strong>ZEPPELIN_INTERPRETER_OUTPUT_LIMIT</strong></div>"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=275",
+       "$$hashKey": "object:2129"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=276",
+       "$$hashKey": "object:2130"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638303433557_2090990794",
+   "id": "paragraph_1638303433557_2090990794",
+   "dateCreated": "2021-11-30T20:17:13+0000",
+   "dateStarted": "2021-12-01T19:15:09+0000",
+   "dateFinished": "2021-12-01T19:15:10+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1011"
+  },
+  {
+   "title": "Сохраняем модель",
+   "text": "\r\nmodel.save(sc, s\"$basePath/irisPipelineModel/irisRandomForestClassificationModel\")",
+   "user": "anonymous",
+   "dateUpdated": "2021-12-01T19:22:49+0000",
+   "progress": 100,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": []
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=277",
+       "$$hashKey": "object:2180"
+      },
+      {
+       "jobUrl": "http://b3d0d85416c1:4040/jobs/job?id=278",
+       "$$hashKey": "object:2181"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638386109083_314186905",
+   "id": "paragraph_1638386109083_314186905",
+   "dateCreated": "2021-12-01T19:15:09+0000",
+   "dateStarted": "2021-12-01T19:20:02+0000",
+   "dateFinished": "2021-12-01T19:20:05+0000",
+   "status": "FINISHED",
+   "$$hashKey": "object:1012"
+  },
+  {
+   "user": "anonymous",
+   "progress": 0,
+   "config": {
+    "colWidth": 12,
+    "fontSize": 9,
+    "enabled": true,
+    "results": {},
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/scala"
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1638386344324_1549924717",
+   "id": "paragraph_1638386344324_1549924717",
+   "dateCreated": "2021-12-01T19:19:04+0000",
+   "status": "READY",
+   "$$hashKey": "object:1013"
   }
  ],
  "name": "irisResearch",
