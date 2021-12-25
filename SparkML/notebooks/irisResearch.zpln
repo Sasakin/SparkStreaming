@@ -45,7 +45,7 @@
   },
   {
    "title": "Импорт данных об ирисах",
-   "text": "import org.apache.spark.ml.classification.LogisticRegression\n\n// Load training data\nval training = spark\n        .read\n        .option(\"header\", \"true\")\n        .option(\"inferSchema\", \"true\")\n        .csv(s\"$basePath/data/Iris.csv\")\n\nval lr = new LogisticRegression()\n  .setMaxIter(10)\n  .setRegParam(0.3)\n  .setElasticNetParam(0.8)util.Properties.versionString",
+   "text": "import org.apache.spark.ml.classification.LogisticRegression\n\n// Load training data\nval training = spark\n        .read\n        .option(\"header\", \"true\")\n        .option(\"inferSchema\", \"true\")\n        .csv(s\"$basePath/data/Iris.csv\")\n\nval lr = new LogisticRegression()\n  .setMaxIter(10)\n  .setRegParam(0.3)\n  .setElasticNetParam(0.8)",
    "user": "anonymous",
    "dateUpdated": "2021-12-01T19:26:13+0000",
    "progress": 0,
@@ -783,7 +783,7 @@
   },
   {
    "title": "Сохраняем модель",
-   "text": "\r\nmodel.save(sc, s\"$basePath/irisPipelineModel/irisRandomForestClassificationModel\")",
+   "text": "model.save(sc, s\"$basePath/irisPipelineModel/irisRandomForestClassificationModel\")",
    "user": "anonymous",
    "dateUpdated": "2021-12-01T19:22:49+0000",
    "progress": 100,
@@ -837,35 +837,6 @@
    "dateFinished": "2021-12-01T19:20:05+0000",
    "status": "FINISHED",
    "$$hashKey": "object:1012"
-  },
-  {
-   "user": "anonymous",
-   "progress": 0,
-   "config": {
-    "colWidth": 12,
-    "fontSize": 9,
-    "enabled": true,
-    "results": {},
-    "editorSetting": {
-     "language": "scala",
-     "editOnDblClick": false,
-     "completionKey": "TAB",
-     "completionSupport": true
-    },
-    "editorMode": "ace/mode/scala"
-   },
-   "settings": {
-    "params": {},
-    "forms": {}
-   },
-   "apps": [],
-   "runtimeInfos": {},
-   "progressUpdateIntervalMs": 500,
-   "jobName": "paragraph_1638386344324_1549924717",
-   "id": "paragraph_1638386344324_1549924717",
-   "dateCreated": "2021-12-01T19:19:04+0000",
-   "status": "READY",
-   "$$hashKey": "object:1013"
   }
  ],
  "name": "irisResearch",
