@@ -2,7 +2,6 @@ package ru.otus.sparkml
 
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.apache.spark.ml.PipelineModel
-import org.apache.spark.ml.classification.LogisticRegression
 
 object ProdML {
   def main(args: Array[String]): Unit = {
@@ -44,5 +43,4 @@ object ProdML {
       spark.stop()
     }
   }
-  new LogisticRegression().
 }
